@@ -31,6 +31,6 @@ public class ServiceImpl implements Service, Serializable {
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         long writeTime = in.readLong();
-//        System.out.println(writeTime);
+        System.out.println(writeTime);
     }
 }

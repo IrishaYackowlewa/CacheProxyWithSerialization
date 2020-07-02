@@ -6,11 +6,10 @@ public interface Serializer<T extends Serializable> {
 
     /**
      * Сериализует объект класса {@link T}
-     *
-     * @param o объект типа {@link T} в файл
+     *  @param o объект типа {@link T} в файл
      * @param fileName имя файла
      */
-    default void serialize(T o, String fileName) throws IOException {
+    default void serialize(Object o, String fileName) throws IOException {
         try(
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(fileOutputStream)
@@ -28,13 +27,13 @@ public interface Serializer<T extends Serializable> {
      * @return {@link T}
      */
     @SuppressWarnings("unchecked")
-    default T deserialize(String fileName) throws IOException, ClassNotFoundException {
+    default Object deserialize(String fileName) throws IOException, ClassNotFoundException {
         try(
             FileInputStream fileInputStream = new  FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileInputStream)
         ) {
             System.out.println("Deserialization start");
-            T deserializedObject = (T) in.readObject();
+            Object deserializedObject = (Object) in.readObject();
             System.out.println(deserializedObject.getClass().getSimpleName() + " deserialization finish");
             return deserializedObject;
         }
